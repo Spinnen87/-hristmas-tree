@@ -1,6 +1,10 @@
+import { initializeApp } from "firebase/app";
 import imgSrc from './images/christmas-tree.png'
 import {SignIn} from "./Components/SignIn/SignIn";
 import {Circle} from "./Components/Сircle/Сircle";
+import {getFireBaseConfig} from "./firebase-config";
+
+initializeApp(getFireBaseConfig());
 
 function App() {
   return (
