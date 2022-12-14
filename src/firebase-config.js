@@ -11,8 +11,8 @@ const firebaseConfig = {
 
 export const getFireBaseConfig = () => {
     if (!firebaseConfig || !firebaseConfig.apiKey) {
-        throw new Error('No Firebase configuration object provided.' + '\n' +
-            'Add your web app\'s configuration object to firebase-config.js');
+        throw new Error("No Firebase configuration object provided. Add your web app's configuration object" +
+            " tofirebase-config.js");
     } else {
         return firebaseConfig;
     }
