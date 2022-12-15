@@ -1,15 +1,12 @@
-import { initializeApp } from "firebase/app";
-import imgSrc from './images/christmas-tree.png'
+import imgSrc from './images/christmas-tree2.png'
 import {SignIn} from "./Components/SignIn/SignIn";
 import {Circle} from "./Components/Сircle/Сircle";
-import {getFireBaseConfig} from "./firebase-config";
-
-initializeApp(getFireBaseConfig());
+import './snowflakes';
 
 function App() {
   return (
     <div className={'app'}>
-        <img src={imgSrc} alt='Christmas tree'/>
+        <img src={imgSrc} alt='Christmas tree' height={700}/>
         <Circle />
         <SignIn />
     </div>
