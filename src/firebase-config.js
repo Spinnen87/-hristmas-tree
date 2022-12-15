@@ -1,3 +1,6 @@
+import {initializeApp} from "firebase/app";
+import {getFirestore, collection} from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -6,10 +9,9 @@ const firebaseConfig = {
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID
-
 };
 
-export const getFireBaseConfig = () => {
+const getFireBaseConfig = () => {
     if (!firebaseConfig || !firebaseConfig.apiKey) {
         throw new Error("No Firebase configuration object provided. Add your web app's configuration object" +
             " tofirebase-config.js");
@@ -17,3 +19,11 @@ export const getFireBaseConfig = () => {
         return firebaseConfig;
     }
 }
+
+const firebaseApp = initializeApp(getFireBaseConfig());
+
+export const db = getFirestore(firebaseApp);
+export const usersCollectionsRef = collection(db, 'testUsers');
+
+
+export const storage = getStorage(firebaseApp);
