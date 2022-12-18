@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #cbe4fb url(./images/background.png) no-repeat fixed bottom;
-  background-size: contain;
+  background-size: cover;
 }
 
 code {

@@ -7,7 +7,7 @@ export const JoinBtn = () => {
 
   return (
     <div style={{ position: "fixed", bottom: 0, marginBottom: "10px" }}>
-      <Button onClick={() => setIsShowModal(true)}>И я, и я хочу ...</Button>
+      <Button onClick={() => setIsShowModal(true)}>Присоединиться</Button>
 
       {isShowModal && <JoinModal closeModal={() => setIsShowModal(false)} />}
     </div>

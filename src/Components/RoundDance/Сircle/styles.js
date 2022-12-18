@@ -49,7 +49,8 @@ export const ImgAnimateContainer = styled.div`
 `;
 
 export const StyledImg = styled.img`
-  max-width: 100%;
+  width: calc(var(--d) * 1.5);
+  height: calc(var(--d) * 1.5);
   border-radius: 50%;
   box-shadow: 0 3px 10px #0003;
   background-color: #fff;

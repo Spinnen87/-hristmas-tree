@@ -5,6 +5,7 @@ import { storage, usersCollectionsRef } from "../../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { UploadOutlined } from "@ant-design/icons";
 import { beforeUpload } from "./helpers";
+import { HNY_CURRENT_USER} from '../../consts'
 
 export const JoinModal = ({ closeModal }) => {
   const id = useId();
@@ -24,8 +25,8 @@ export const JoinModal = ({ closeModal }) => {
     const fileRef = ref(storage, fileName);
     const snapshot = await uploadBytes(fileRef, file);
     const avatarUrl = await getDownloadURL(snapshot.ref);
-    await addDoc(usersCollectionsRef, { name: userName, avatarUrl });
-
+    const user = await addDoc(usersCollectionsRef, { name: userName, avatarUrl });
+    localStorage.setItem(HNY_CURRENT_USER, user.id);
     setConfirmLoading(false);
     closeModal();
   };
