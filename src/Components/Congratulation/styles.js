@@ -8,6 +8,7 @@ export const CongratulationContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 300px;
+  z-index: 99;
 `;
 
 export const MessagesListContainer = styled.div`

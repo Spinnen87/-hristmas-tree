@@ -11,10 +11,12 @@ export const MessagesList = () => {
 
   useEffect(() => {
     return onSnapshot(congratulationMessagesCollectionsRef, (snapshot) => {
-      const mesList = snapshot.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .sort((a, b) => a?.timestamp?.seconds - b?.timestamp?.seconds);
-      setMessagesList(mesList);
+      if (!snapshot.metadata.hasPendingWrites) {
+        const mesList = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => a?.timestamp?.seconds - b?.timestamp?.seconds);
+        setMessagesList(mesList);
+      }
     });
   }, []);
 
