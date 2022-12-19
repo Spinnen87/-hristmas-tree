@@ -1,11 +1,11 @@
 import React, { useState, useId } from "react";
-import { Button, Input, Modal, Upload, Space, message } from "antd";
+import { Button, Input, Modal, Upload, Space, message, Spin } from "antd";
 import { addDoc } from "firebase/firestore";
 import { storage, usersCollectionsRef } from "../../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { UploadOutlined } from "@ant-design/icons";
 import { beforeUpload } from "./helpers";
-import { HNY_CURRENT_USER} from '../../consts'
+import { HNY_CURRENT_USER } from "../../consts";
 
 export const JoinModal = ({ closeModal }) => {
   const id = useId();
@@ -19,16 +19,22 @@ export const JoinModal = ({ closeModal }) => {
       return;
     }
     setConfirmLoading(true);
-
-    const { file } = avatarImg;
-    const fileName = `avatars/${userName}${id}${file.name}`;
-    const fileRef = ref(storage, fileName);
-    const snapshot = await uploadBytes(fileRef, file);
-    const avatarUrl = await getDownloadURL(snapshot.ref);
-    const user = await addDoc(usersCollectionsRef, { name: userName, avatarUrl });
-    localStorage.setItem(HNY_CURRENT_USER, user.id);
-    setConfirmLoading(false);
-    closeModal();
+    try {
+      const { file } = avatarImg;
+      const fileName = `avatars/${userName}${id}${file.name}`;
+      const fileRef = ref(storage, fileName);
+      const snapshot = await uploadBytes(fileRef, file);
+      const avatarUrl = await getDownloadURL(snapshot.ref);
+      const user = await addDoc(usersCollectionsRef, {
+        name: userName,
+        avatarUrl,
+      });
+      localStorage.setItem(HNY_CURRENT_USER, user.id);
+      setConfirmLoading(false);
+      closeModal();
+    } catch {
+      console.log("Add user: Something went wrong...");
+    }
   };
 
   return (
@@ -39,23 +45,24 @@ export const JoinModal = ({ closeModal }) => {
       confirmLoading={confirmLoading}
       onCancel={closeModal}
     >
-      <Space direction="vertical" style={{ width: "100%" }}>
-        <Input
-          placeholder="Введите имя"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          status={userName ? null : "error"}
-        />
-        <Upload
-          beforeUpload={beforeUpload}
-          removeFile={() => setAvatarImg()}
-          onChange={(file) => setAvatarImg(file)}
-          maxCount={1}
-          listType="picture"
-        >
-          <Button icon={<UploadOutlined />}>Выбрать аватар</Button>
-        </Upload>
-      </Space>
+      <Spin spinning={confirmLoading}>
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Input
+            placeholder="Введите имя"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <Upload
+            beforeUpload={beforeUpload}
+            removeFile={() => setAvatarImg()}
+            onChange={(file) => setAvatarImg(file)}
+            maxCount={1}
+            listType="picture"
+          >
+            <Button icon={<UploadOutlined />}>Выбрать аватар</Button>
+          </Upload>
+        </Space>
+      </Spin>
     </Modal>
   );
 };

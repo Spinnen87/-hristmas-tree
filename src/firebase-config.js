@@ -26,5 +26,9 @@ const firebaseApp = initializeApp(getFireBaseConfig());
 
 export const db = getFirestore(firebaseApp);
 export const usersCollectionsRef = collection(db, "users");
+export const congratulationMessagesCollectionsRef = collection(
+  db,
+  "congratulationMessages"
+);
 
 export const storage = getStorage(firebaseApp);

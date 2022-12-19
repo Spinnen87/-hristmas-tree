@@ -6,8 +6,17 @@ export const JoinBtn = () => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   return (
-    <div style={{ position: "fixed", bottom: 0, marginBottom: "10px" }}>
-      <Button onClick={() => setIsShowModal(true)}>Присоединиться</Button>
+    <div
+      style={{
+        position: "fixed",
+        bottom: 0,
+        marginBottom: "10px",
+        zIndex: 100,
+      }}
+    >
+      <Button onClick={() => setIsShowModal(true)} type="primary" danger>
+        Присоединиться
+      </Button>
 
       {isShowModal && <JoinModal closeModal={() => setIsShowModal(false)} />}
     </div>

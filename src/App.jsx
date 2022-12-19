@@ -2,6 +2,7 @@ import imgSrc from "./images/christmas-tree.png";
 import imgSrc2 from "./images/christmas-tree2.png";
 import { RoundDance } from "./Components/RoundDance/RoundDance";
 import { JoinBtn } from "./Components/Join/Join";
+import { Congratulation } from './Components/Congratulation/Congratulation'
 import "./snowflakes";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <img src={imgSrc2} alt="Christmas tree" height={600}  style={{position: 'absolute', 'zIndex': 2}}/>
       <RoundDance />
       <JoinBtn />
+      <Congratulation />
     </div>
   );
 }
