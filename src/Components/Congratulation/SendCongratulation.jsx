@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Input, Button, Space, Spin } from "antd";
+import { Input, Button, Space, Spin, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import { congratulationMessagesCollectionsRef } from "../../firebase-config";
@@ -9,12 +9,12 @@ const { TextArea } = Input;
 
 export const SendCongratulation = () => {
   const { currentUser } = useContext(CurrentUserContext);
-  const [message, setMessage] = useState("");
+  const [congratulationText, setCongratulationText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handelSendMEssage = async () => {
-    if (!message) {
-      message.error("Введите поздравление");
+    if (!congratulationText) {
+      message.error("Введите текст поздравления");
       return;
     }
     try {
@@ -22,13 +22,13 @@ export const SendCongratulation = () => {
       await addDoc(congratulationMessagesCollectionsRef, {
         userName: currentUser.name,
         avatarUrl: currentUser.avatarUrl,
-        message,
+        message: congratulationText,
         timestamp: serverTimestamp(),
       });
-      setMessage("");
+      setCongratulationText("");
       setIsLoading(false);
     } catch {
-      console.log("Add user: Something went wrong...");
+      console.log("Send message: Something went wrong...");
     }
   };
 
@@ -42,8 +42,9 @@ export const SendCongratulation = () => {
           >
             <TextArea
               rows={4}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              value={congratulationText}
+              onChange={(e) => setCongratulationText(e.target.value)}
+              placeholder="Введите текст поздравления"
             />
             <Button
               icon={<SendOutlined />}
@@ -51,7 +52,7 @@ export const SendCongratulation = () => {
               style={{ width: "100%" }}
               type="primary"
             >
-              Отправить поздравление
+              Поздравить
             </Button>
           </Space>
         </Spin>
