@@ -1,4 +1,4 @@
-import React, { useState, useId } from "react";
+import React, { useState, useId, useContext } from "react";
 import { Button, Input, Modal, Upload, Space, message, Spin } from "antd";
 import { addDoc } from "firebase/firestore";
 import { storage, usersCollectionsRef } from "../../firebase-config";
@@ -6,8 +6,10 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { UploadOutlined } from "@ant-design/icons";
 import { beforeUpload } from "./helpers";
 import { HNY_CURRENT_USER } from "../../consts";
+import { CurrentUserContext } from "../../CurrentUserContext";
 
 export const JoinModal = ({ closeModal }) => {
+  const { setCurrentUser } = useContext(CurrentUserContext);
   const id = useId();
   const [avatarImg, setAvatarImg] = useState(null);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -25,11 +27,16 @@ export const JoinModal = ({ closeModal }) => {
       const fileRef = ref(storage, fileName);
       const snapshot = await uploadBytes(fileRef, file);
       const avatarUrl = await getDownloadURL(snapshot.ref);
-      const user = await addDoc(usersCollectionsRef, {
+      const user = {
         name: userName,
         avatarUrl,
+      };
+      const userSnapshot = await addDoc(usersCollectionsRef, user);
+      localStorage.setItem(HNY_CURRENT_USER, userSnapshot.id);
+      setCurrentUser({
+        ...user,
+        id: userSnapshot.id,
       });
-      localStorage.setItem(HNY_CURRENT_USER, user.id);
       setConfirmLoading(false);
       closeModal();
     } catch {

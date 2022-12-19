@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "antd";
 import { JoinModal } from "./JoinModal";
+import { CurrentUserContext } from "../../CurrentUserContext";
+import { HNY_CURRENT_USER } from "../../consts";
 
 export const JoinBtn = () => {
+  const { currentUser } = useContext(CurrentUserContext);
   const [isShowModal, setIsShowModal] = useState(false);
 
-  return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 0,
-        marginBottom: "10px",
-        zIndex: 100,
-      }}
-    >
-      <Button onClick={() => setIsShowModal(true)} type="primary" danger>
-        Присоединиться
-      </Button>
+  const isSavedUser = localStorage.getItem(HNY_CURRENT_USER);
 
-      {isShowModal && <JoinModal closeModal={() => setIsShowModal(false)} />}
-    </div>
+  return (
+    <>
+      {!currentUser && !isSavedUser && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            marginBottom: "10px",
+            zIndex: 100,
+          }}
+        >
+          <Button onClick={() => setIsShowModal(true)} type="primary" danger>
+            Присоединиться
+          </Button>
+
+          {isShowModal && (
+            <JoinModal closeModal={() => setIsShowModal(false)} />
+          )}
+        </div>
+      )}
+    </>
   );
 };
