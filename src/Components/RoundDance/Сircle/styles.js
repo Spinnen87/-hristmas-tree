@@ -55,4 +55,5 @@ export const StyledImg = styled.img`
   box-shadow: 0 3px 10px #0003;
   background-color: #fff;
   border: 2px solid white;
+  object-fit: cover;
 `;
