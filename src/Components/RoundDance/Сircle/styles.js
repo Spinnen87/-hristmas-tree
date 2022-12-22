@@ -38,7 +38,7 @@ export const ImgAnimateContainer = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 0.7em;
-  color: ##1677ff;
+  color: #1677ff;
   font-weight: 600;
 
   @keyframes spin-b {
