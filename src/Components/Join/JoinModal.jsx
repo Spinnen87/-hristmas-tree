@@ -25,7 +25,9 @@ export const JoinModal = ({ closeModal }) => {
       const { file } = avatarImg;
       const fileName = `avatars/${userName}${id}${file.name}`;
       const fileRef = ref(storage, fileName);
-      const snapshot = await uploadBytes(fileRef, file);
+      const snapshot = await uploadBytes(fileRef, file, {
+        cacheControl: "public, max-age=300",
+      });
       const avatarUrl = await getDownloadURL(snapshot.ref);
       const user = {
         name: userName,
