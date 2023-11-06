@@ -1,1 +1,1 @@
-export const HNY_CURRENT_USER = "HPY_user2024";
+export const HNY_CURRENT_USER = "HPY_user";
