@@ -6,6 +6,13 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+env:
+  REACT_APP_API_KEY: AIzaSyAy5A5N4UPmXc86ffpyW9u1deXmZTRXbcI,
+  REACT_APP_AUTH_DOMAIN: happy-new-year-2cf02.firebaseapp.com,
+  REACT_APP_PROJECT_ID: happy-new-year-2cf02,
+  REACT_APP_STORAGE_BUCKET: happy-new-year-2cf02.appspot.com,
+  REACT_APP_MESSAGING_SENDER_ID:  774300158467,
+  REACT_APP_APP_ID: 1:774300158467:web:5c5e958c86cd7d27ea9c36
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
