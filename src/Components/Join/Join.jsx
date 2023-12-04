@@ -22,7 +22,7 @@ export const JoinBtn = () => {
           }}
         >
           <Button onClick={() => setIsShowModal(true)} type="primary" danger>
-            Присоединиться
+            Join
           </Button>
 
           {isShowModal && (

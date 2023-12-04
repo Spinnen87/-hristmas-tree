@@ -24,7 +24,7 @@ export const MessagesList = () => {
     <>
       <Container>
         <Title level={5} type="danger">
-          Поздравления
+            Your wishes
         </Title>
       </Container>
       <MessagesListContainer>

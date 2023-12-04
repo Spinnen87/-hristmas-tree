@@ -17,7 +17,7 @@ export const JoinModal = ({ closeModal }) => {
 
   const handleOk = async () => {
     if (!userName || !avatarImg) {
-      message.error("Заполните форму");
+      message.error("Please fill the form");
       return;
     }
     setConfirmLoading(true);
@@ -48,7 +48,7 @@ export const JoinModal = ({ closeModal }) => {
 
   return (
     <Modal
-      title="Хочу водить хоровод"
+      title="I want to dance in a circle"
       open={true}
       onOk={handleOk}
       confirmLoading={confirmLoading}
@@ -57,7 +57,7 @@ export const JoinModal = ({ closeModal }) => {
       <Spin spinning={confirmLoading}>
         <Space direction="vertical" style={{ width: "100%" }}>
           <Input
-            placeholder="Введите имя"
+            placeholder="Enter your name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
@@ -68,7 +68,7 @@ export const JoinModal = ({ closeModal }) => {
             maxCount={1}
             listType="picture"
           >
-            <Button icon={<UploadOutlined />}>Выбрать аватар</Button>
+            <Button icon={<UploadOutlined />}>Select an avatar</Button>
           </Upload>
         </Space>
       </Spin>

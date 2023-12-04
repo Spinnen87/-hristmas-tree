@@ -14,7 +14,7 @@ export const SendCongratulation = () => {
 
   const handelSendMEssage = async () => {
     if (!congratulationText) {
-      message.error("Введите текст поздравления");
+      message.error("Enter your congratulations text");
       return;
     }
     try {
@@ -44,7 +44,7 @@ export const SendCongratulation = () => {
               rows={4}
               value={congratulationText}
               onChange={(e) => setCongratulationText(e.target.value)}
-              placeholder="Введите текст поздравления"
+              placeholder="Enter your congratulations text"
             />
             <Button
               icon={<SendOutlined />}
@@ -52,7 +52,7 @@ export const SendCongratulation = () => {
               style={{ width: "100%" }}
               type="primary"
             >
-              Поздравить
+              Send Congratulations
             </Button>
           </Space>
         </Spin>
