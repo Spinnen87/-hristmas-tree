@@ -9,6 +9,7 @@ import { HNY_CURRENT_USER } from "./consts";
 import { db } from "./firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import "./snowflakes";
+import music from './music.mp3';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -42,6 +43,17 @@ function App() {
         <RoundDance />
         <JoinBtn />
         <Congratulation />
+        <audio
+            src={music}
+            controls
+            autoPlay
+            loop
+            style={{
+              position: 'absolute',
+              left: '5px',
+              bottom: '5px'
+            }}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
